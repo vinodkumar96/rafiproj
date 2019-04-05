@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<style>
+    /*#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+}*/
+
+body {
+  margin: 0;
+  padding: 0;
+/*  Background fallback in case of IE8 & down, or in case video doens't load, such as with slower connections  */
+  background:red;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+/* The only rule that matters */
+#video-background {
+/*  making the video fullscreen  */
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -100;
+}
+body {
+  margin: 0;
+  padding: 0;
+/*  Background fallback in case of IE8 & down, or in case video doens't load, such as with slower connections  */
+  background: #333;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+/* The only rule that matters */
+#video-background {
+/*  making the video fullscreen  */
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -100;
+}
+
+/* These just style the content */
+article {
+/*  just a fancy border  */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 10px solid rgba(255, 255, 255, 0.5);
+  margin: 10px;
+}
+
+/*****Designer Amresh kanna************/
+/*******Appcookiedeveopler***********/
+/*body{
+margin:10px -10%;
+padding:0;
+font-family:raleway,arial,helvetica,sans-serif;
+background:linear-gradient(45deg,darkorchid,crimson);
+}*/
+.wrapper{
+  width:400px;
+  height:30%;
+  margin: 10% 35% 0 35%;
+  background:rgba(20,30,40,0.6);
+  padding:50px 0 0 0 ;
+  border:25px double mediumvioletred;
+  border-top-color:transparent;
+  animation:3s blink ease-in-out infinite;
+  border-bottom-color:transparent;
+  box-sizing:padding-box;
+  position:absolute;
+  border-radius:28%;
+  box-shadow:0px 60px 200px -40px blue;
+}
+input[type="text"],input[type="password"]{
+    margin:0px 50px;
+    padding:5px 15px;
+    height:30px;
+    width:250px;
+    display:block;
+    color:#fff;
+    font-size:1.2em;
+    position:relative;
+    box-sizing:padding-box;
+    background:transparent;
+    border:none;
+    border-bottom:5px double #fff;
+
+}
+input[type="text"],input[type="password"]:focus{
+outline:none;
+}
+input[type="submit"]{
+margin:0 110px;
+width:150px;
+height:35px;
+padding:5px;
+background:blue;
+border:1px solid #000;
+border-radius:10px;
+box-shadow:0px 10px 20px -8px red;
+}
+/*************Shake animation**********/
+.wrapper:hover {
+  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+/*****************************/
+@keyframes blink {
+20% ,30% {
+        border:25px double ivory;
+         border-top-color:transparent;
+		  border-bottom-color:transparent;
+		}
+50%,70%{
+       border:25px double springgreen;
+         border-top-color:transparent;
+		  border-bottom-color:transparent;
+
+}
+80%,90%,100%{
+          border:25px double #000;
+         border-top-color:transparent;
+		  border-bottom-color:transparent;
+
+}
+
+}
+p {
+  text-align:center;
+  font-size:1.2em;
+  color:#fff;
+  font-weight:bold;
+}
+</style>
+
+</head>
+<body>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<div class="wrapper">
+<form action="" method="POST">
+{% csrf_token %}
+<input type="text" name="username" placeholder="username/email/phnum" required><br>
+<input type="password" name="password" placeholder="password" required><br>
+   <center> <input type="checkbox" tabindex="3" class="" name="remember" id="remember">
+    <label for="remember">Remember Me</label></center>
+<input type="submit" name="submit" value="login" >
+</form>
+</div>
+  <p> <font color="#a52a2a">WEB designer Vinod</font> </p>
+<!--video autoplay loop id="video-background" muted plays-inline>
+  <source src="{% static "Animation.webm" %}"video/webm">
+</video>
+<video width="530" height="440" controls autoplay>
+  <source src="{% static "Animation.webm" %}" type="video/webm"> </source>
+</video>
+<div id="myVideo">
+<video autoplay muted loop id="love2">
+  <source src="{%static "Animation.webm" %}" type="video/webm">
+</video>
+    </div-->
+<video autoplay loop id="video-background" muted plays-inline>
+  <source src="https://ak7.picdn.net/shutterstock/videos/31664557/preview/stock-footage-confetti-party-popper-explosions-on-a-green-background-d-animation-k.webm" type="video/mp4">
+</video>
+
+</body>
+</html>
+
+

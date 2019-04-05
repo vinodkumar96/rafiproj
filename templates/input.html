@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<style>
+/*body {
+  font-family: sans-serif;
+  background-image: url("https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwjcx4uIsIzhAhUFSo8KHa_yD-wQjRx6BAgBEAU&url=http%3A%2F%2Fwww.technocrazed.com%2F45-hd-beautiful-wallpapersbackgrounds-for-free-download&psig=AOvVaw15InYSIgYRPMMkdRPhGwR7&ust=1553022026984304");
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}*/
+#box {
+  background-color: lightgrey;
+  border: 15px solid green;
+  display: flex;
+  justify-content: center;
+  padding: 0px;
+  margin: 20px;
+  color:orangered;
+}
+* {
+  box-sizing: border-box;
+}
+
+/* Add padding to containers */
+.container {
+  padding: 16px;
+  background-color: orange;
+}
+
+/* Full-width input fields */
+input{
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: aquamarine;
+  color: black;
+  font-size: 13px;
+}
+
+input[type=text]:focus{
+  color: darkslategray;
+  background-color:coral;
+  outline: none;
+}
+
+/* Overwrite default styles of hr */
+hr {
+  border: 1px solid darkblue;
+  margin-bottom: 25px;
+
+}
+
+.button5 {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  padding: 0px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 20px 20px;
+  cursor: pointer;
+  border-radius: 100%;
+  width:30%;
+  color:purple;
+}
+
+/*.button4 {
+  background-color:blue; /* Green */
+  border: none;
+  color: white;
+  padding:0px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 20px 20px;
+  cursor: pointer;
+  width:30%;
+    }*/
+
+
+/*.button4 {
+border-radius: 12px;
+ display: flex;
+    justify-content: center;
+}*/
+.button5 {
+
+}
+.button5:hover{
+  opacity: 1;
+    color: #B20940;
+    background: burlywood;
+  }
+
+/* Set a style for the submit button */
+.testbtn {
+    font-size: 1.7rem;
+    margin: 1rem auto;
+    padding: .7rem;
+    background-color: fuchsia;
+    color: black;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    width: 60%;
+}
+  /*font-size: 15px;
+  margin: 8px 0;
+  padding: 16px 20px;*/
+
+
+
+.testbtn:hover {
+  opacity: 1;
+    color: #B20940;
+    background: burlywood;
+}
+
+/*display: block;
+  width: 80%;
+  padding: .4rem;
+  border: none;
+  margin: 1rem auto;
+  font-size: 1.3rem;
+  background: rgba(255,255,255,0.23);
+  color: #fff;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: .3s background;
+}
+#polina button:hover {
+   background: rgba(0,0,0,0.5);*/
+
+/* Add a blue text color to links */
+
+
+/* Set a grey background color and center the text of the "sign in" section */
+.feedback {
+  width: 100%;
+  background-color:green;
+  text-align: center;
+  font-size: 15px;
+}
+p{
+    font-family: 'Sofia';font-size: 15px;
+}
+.Game {
+  width: 100%;
+  background-color:mediumpurple;
+  text-align: center;
+  font-size: 15px;
+}
+.img {
+  width: 100%;
+  background-color:palevioletred;
+  text-align: center;
+  font-size: 15px;
+}
+
+
+
+
+
+
+video {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    transform: translateX(-50%) translateY(-50%);
+ background: url('//demosthenes.info/assets/images/polina.jpg') no-repeat;
+  background-size: cover;
+  transition: 1s opacity;
+}
+.stopfade {
+   opacity: .5;
+}
+
+#polina {
+  font-family: Agenda-Light, Agenda Light, Agenda, Arial Narrow, sans-serif;
+  font-weight:100;
+  background: rgba(0,0,0,0.2);
+  /*margin: 2px 75px 5px 100px;*/
+  color: darkblue;
+  padding: 15px;
+  margin: 15px;
+  /*margin:2rem;
+  padding: 2rem; */
+  float: initial;
+  font-size: 1.2rem;
+}
+
+#myBtn {
+  display: block;
+  width: 80%;
+  font-size: 30px;
+  font-family:'Faster One';
+  padding: .4rem;
+  border: none;
+  margin: 1rem auto;
+  border-radius: 3px;
+  background: rgba(255,255,255,0.23);
+  /*background: yellow;*/
+  color: red;
+  cursor: pointer;
+  transition: .3s background;
+}
+
+#myBtn:hover {
+  background: rgba(0,0,0,0.5);
+  /*background: brown;*/
+  color: black;
+}
+
+/*#polina button {
+  display: block;
+  width: 80%;
+  padding: .4rem;
+  border: none;
+  margin: 1rem auto;
+  font-size: 1.3rem;
+  background: rgba(255,255,255,0.23);
+  color: #fff;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: .3s background;
+}
+#polina button:hover {
+   background: rgba(0,0,0,0.5);
+}*/
+a {
+  display: inline-block;
+  color:red;
+  text-decoration: none;
+  background:rgba(0,0,0,0.5);
+  padding: .5rem;
+  transition: .6s background;
+}
+a:hover {
+    background: rgba(0, 0, 0, 0.9);
+}
+
+@media screen and (max-width: 500px) {
+  div{width:70%;}
+}
+@media screen and (max-device-width: 800px) {
+  html { background: url(https://thenewcode.com/assets/images/polina.jpg) #000 no-repeat center center fixed; }
+  #bgvid { display: none; }
+}
+
+</style>
+
+    <link href='https://fonts.googleapis.com/css?family=Faster One' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+</head>
+<body>
+<video poster="https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/polina.jpg" id="bgvid" playsinline autoplay muted loop>
+  <!--
+- Video needs to be muted, since Chrome 66+ will not autoplay video with sound.
+WCAG general accessibility recommendation is that media such as background video play through only once. Loop turned on for the purposes of illustration; if removed, the end of the video will fade in the same way created by pressing the "Pause" button  -->
+<source src="http://thenewcode.com/assets/videos/polina.webm" type="video/webm">
+<source src="http://thenewcode.com/assets/videos/polina.mp4" type="video/mp4">
+
+</video>
+
+<div id="polina">
+
+    <form action="/output/" method="POST">
+   {% csrf_token %}
+
+        <div id="box"><h1>LOVE Test Form</h1></div>
+        <p></p><a href="http://vinodkumar96.pythonanywhere.com/love">Click here to Visit my another site..</a>
+    <p><font color="brown">Please fill in this form to check your LOVE status.</font></p>
+    <hr>
+    <label for="t1"><b>Your Name</b></label>
+    <input type="text" placeholder="Enter Your Name" name="t1" required>
+
+    <label for="t2"><b>Your Lover Name</b></label>
+    <input type="text" placeholder="Enter Your Lover Name" name="t2" required>
+
+    <label for="t3"><b>About Your Love</b></label>
+    <input type="text" placeholder="Write something about your love.." name="t3" required>
+    <hr>
+    <p1>By testing the love condition you agree to our <a href="/terms">Terms & Privacy</a>.</p1>
+
+    <!--input class="testbtn" type="reset" value="Reset Form" name="submit">
+    <button class="testbtn" type="submit" >Test</button-->
+        <button class="button5" type="reset" value="Reset Form" name="submit"><h2>RE-SET Form</h2></button>
+        <button type="submit" class="testbtn">Test</button>
+        <!--button type="submit" class="button4"><h1>Test</h1></button-->
+<!--button class="button button4"><h1>Test</h1></button-->
+  <div class="container feedback">
+    <p1>Already have test your love status? <a href="/feedback">Plese Give me Feedback</a>.</p1>
+  </div>
+    <div class="container Game">
+    <p2>Are you playing a small Game? <a href="/game">YES &nbsp</a>/&nbsp NO.</p2>
+  </div>
+    <div class="container img">
+    <p1>HALFTONE Maker  ==> <a href="/image">Click here to edit your Images</a>.</p1>
+  </div>
+
+</form>
+
+
+
+<button id="myBtn">Pause</button>
+</div>
+
+<script>
+var vid = document.getElementById("bgvid");
+var pauseButton = document.querySelector("#myBtn");
+
+if (window.matchMedia('(prefers-reduced-motion)').matches) {
+    vid.removeAttribute("autoplay");
+    vid.pause();
+    pauseButton.innerHTML = "Play";
+}
+
+function vidFade() {
+  vid.classList.add("stopfade");
+}
+
+vid.addEventListener('ended', function()
+{
+// only functional if "loop" is removed
+vid.pause();
+// to capture IE10
+vidFade();
+});
+
+
+pauseButton.addEventListener("click", function() {
+  vid.classList.toggle("stopfade");
+  if (vid.paused) {
+    vid.play();
+    pauseButton.innerHTML = "Pause";
+  } else {
+    vid.pause();
+    pauseButton.innerHTML = "Play";
+  }
+})
+
+
+</script>
+</body>
+</html>

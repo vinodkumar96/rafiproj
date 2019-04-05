@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>image</title>
+<style>
+    body{
+  padding: 20px;
+  margin: 0px;
+  background: #2e2e2e;
+  color: #f0f0f0;
+  font: 14px arial, sans-serif;
+}
+
+a:link {
+  display: none;
+  color: lightGreen;
+}
+a:hover {
+  color: white;
+}
+a:active {
+  color: white;
+}
+a:visited {
+  color: lightGreen;
+}
+
+canvas:hover {
+  border: 1px solid white;
+}
+
+.drop-area {
+  border: 2px dashed #ccc;
+  border-radius: 20px;
+  font-family: sans-serif;
+  margin: 20px auto;
+  padding: 20px;
+  padding-top: 0px;
+}
+
+.drop-area.highlight {
+  border-color: purple;
+  filter: drop-shadow(0 0 30px purple);
+}
+
+h1 {
+  margin-bottom: 0px;
+}
+
+img {
+  margin-right: 15px;
+  margin-top: 15px;
+}
+
+.slideUnit {
+  font-size: 14px;
+  background: #306030;
+  display: inline-block;
+  padding: 3px;
+  padding-bottom: 8px;
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
+
+input[type=range] {
+  width: 800px;
+  height: 5px;
+  -webkit-appearance: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 8px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #3071a9;
+  border-radius: 1.3px;
+  border: 0.2px solid #010101;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: 1px solid #202060;
+  height: 21px;
+  width: 12px;
+  border-radius: 3px;
+  background: #9090ff;
+  cursor: pointer;
+  margin-top: -7px;
+  box-shadow: 0.5px 0.5px 3px #000000;
+}
+
+input[type=range]:focus::-webkit-slider-thumb {
+  border: 1px solid #000000;
+  box-shadow: 0.5px 0.5px 3px #808080,0.5px 0.5px 3px #808080,0.5px 0.5px 3px #808080,0.5px 0.5px 3px #808080,0.5px 0.5px 3px #808080;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+  border: 1px solid #808080;
+}
+
+.displayImage {
+  border: 1px solid gray;
+}
+
+.overlapContainer {
+  position: relative;
+  background-color: white;
+  padding: 0;
+  margin: 0;
+  margin-top: 20px;
+}
+
+.overlayLayerC {
+  position: absolute;
+  left: 25px;
+  top: 17px;
+  padding: 0;
+  margin: 0;
+  mix-blend-mode: multiply;
+}
+
+.overlayLayerM {
+  position: absolute;
+  left: 12px;
+  top: 0px;
+  padding: 0;
+  margin: 0;
+  mix-blend-mode: multiply;
+}
+
+.overlayLayerY {
+  position: absolute;
+  left: -8px;
+  top: -8px;
+  padding: 0;
+  margin: 0;
+  mix-blend-mode: multiply;
+}
+
+.overlayLayerK {
+  position: absolute;
+  left: 9px;
+  top: -12px;
+  padding: 0;
+  margin: 0;
+  mix-blend-mode: multiply;
+}
+
+.title {
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+.check {
+  cursor: pointer;
+  margin-top: 3px;
+  margin-bottom: 10px;
+  width: 150px;
+  display: inline-block;
+  font-size: 18px;
+}
+
+.tickC {
+  background: #005050;
+}
+
+.tickM {
+  background: #500050;
+}
+
+.tickY {
+  background: #505000;
+}
+
+.tickK {
+  background: #505050;
+}
+
+</style>
+</head>
+<body>
+
+<div id="dropArea" class="drop-area">
+  <h1>Halftone maker - Drag image file here.</h1>
+  <br />
+  Select your image with the "File choose" button, or by dragging and dropping the image file from your PC or another browser image into the dashed region.<br />
+  <br/>
+  <input type="file" onchange="handleDrop(this.files)" />
+  <label class="button" for="fileElem">&lt;&lt;&lt; Select a image</label><br />
+  <div id="output">
+    <img src="https://untamed.co.uk/miscImages/garfield.jpg" id="inputImage" crossOrigin="anonymous" />
+    <img src="" id="outputImage" class="displayImage" />
+    <img src="" id="cImage" class="displayImage" />
+    <img src="" id="mImage" class="displayImage" />
+    <img src="" id="yImage" class="displayImage" />
+    <img src="" id="kImage" class="displayImage" />
+  </div>
+</div>
+<div class="title">Move the following layers when you drag the below images:</div>
+
+<span class="check tickC" onClick="toggleCheck(this)"><input type="checkbox" id="cCheck" value="cc" checked> Cyan</span>
+<span class="check tickM" onClick="toggleCheck(this)"><input type="checkbox" id="mCheck" value="cm" checked> Magenta</span>
+<span class="check tickY" onClick="toggleCheck(this)"><input type="checkbox" id="yCheck" value="cy" checked> Yellow</span>
+<span class="check tickK" onClick="toggleCheck(this)"><input type="checkbox" id="kCheck" value="ck" checked> Key (black)</span>
+<br />
+  <div class="slideUnit">
+    Dot size: <span id="dotSizeText"></span><br />
+    <input type="range" min="2" max="20" value="3" id="dotSize" oninput="changeDotSize(this.value)">
+  </div>
+<br />
+<div class="slideUnit">
+  X Offset: </span><br />
+<input type="range" min="-700" max="700" value="0" id="xOffsetDrag" oninput="changeXOffset(this.value)">
+</div>
+<br />
+<div class="slideUnit">
+  Y Offset: <br />
+  <input type="range" min="-700" max="700" value="0" id="yOffsetDrag" oninput="changeYOffset(this.value)">
+</div>
+<br />
+<div class="slideUnit">
+  Rotation: <br />
+  <input type="range" min="-180" max="180" value="0" id="rotationDrag" oninput="changeRotation(this.value)">
+</div>
+
+<div id="overlapContainer" class="overlapContainer">
+  <img src="" id="cImageOverlap" class="overlayLayerC" />
+  <img src="" id="mImageOverlap" class="overlayLayerM" />
+  <img src="" id="yImageOverlap" class="overlayLayerY" />
+  <img src="" id="kImageOverlap" class="overlayLayerK" />
+</div>
+
+<br />
+<br />
+<br />
+
+<script>
+    /*
+
+Heavily based on:
+https://github.com/patrickmatte/color-halftone-filter
+
+*/
+
+var inputImage = document.getElementById("inputImage");
+var outputImage = document.getElementById("outputImage");
+var cImage = document.getElementById("cImage");
+var mImage = document.getElementById("mImage");
+var yImage = document.getElementById("yImage");
+var kImage = document.getElementById("kImage");
+var overlapContainer = document.getElementById("overlapContainer");
+var dotSizeText = document.getElementById("dotSizeText");
+
+var cImageOverlap = document.getElementById("cImageOverlap");
+var mImageOverlap = document.getElementById("mImageOverlap");
+var yImageOverlap = document.getElementById("yImageOverlap");
+var kImageOverlap = document.getElementById("kImageOverlap");
+
+var xSlider = document.getElementById("xOffsetDrag");
+var ySlider = document.getElementById("yOffsetDrag");
+var rotationSlider = document.getElementById("rotationDrag");
+
+var cCheck = document.getElementById("cCheck");
+var mCheck = document.getElementById("mCheck");
+var yCheck = document.getElementById("yCheck");
+var kCheck = document.getElementById("kCheck");
+
+var xOffsetDragOld = 0;
+var yOffsetDragOld = 0;
+var rotationDragOld = 0;
+
+var imageOverlap = {
+  c: {object: document.getElementById("cImageOverlap"), offsetX: 0, offsetY: 0, rotation: 0},
+  m: {object: document.getElementById("mImageOverlap"), offsetX: 0, offsetY: 0, rotation: 0},
+  y: {object: document.getElementById("yImageOverlap"), offsetX: 0, offsetY: 0, rotation: 0},
+  k: {object: document.getElementById("kImageOverlap"), offsetX: 0, offsetY: 0, rotation: 0}
+};
+
+var overlapCenterX = 0;
+var overlapCenterY = 0;
+
+var dotSize = 5;
+
+dotSizeText.innerHTML = dotSize;
+makeTheHalfToneImage(inputImage, outputImage, cImage, mImage, yImage, kImage, dotSize, updateDisplayImagesCallback);
+
+let dropArea = document.getElementById("dropArea");
+
+;["dragenter", "dragover", "dragleave", "drop"].forEach(eventName => {
+  dropArea.addEventListener(eventName, preventDefaults, false);
+})
+
+function preventDefaults (e) {
+  e.preventDefault()
+  e.stopPropagation()
+}
+
+["dragenter", "dragover"].forEach(eventName => {
+  dropArea.addEventListener(eventName, highlight, false);
+});
+
+["dragleave", "drop"].forEach(eventName => {
+  dropArea.addEventListener(eventName, unhighlight, false);
+});
+
+function highlight(e) {
+  dropArea.classList.add("highlight");
+}
+
+function unhighlight(e) {
+  dropArea.classList.remove("highlight");
+}
+
+dropArea.addEventListener("drop", handleDrop, false);
+
+function handleDrop(e) {
+  let file = null;
+  // Image was selected via "Choose file" button.
+  if(e instanceof FileList)
+    file = e[0];
+  else{
+    // Else image was dragged from PC.
+    if(e.dataTransfer.files.length > 0)
+      file = e.dataTransfer.files[0];
+    else {
+      // Else image was dragged from another browser window.
+      var img = e.dataTransfer.getData("text/html");
+      var div = document.createElement("div");
+      div.innerHTML = img;
+      var src = div.firstChild.src;
+      console.log(div.firstChild, src);
+      inputImage.crossOrigin = "Anonymous";
+      inputImage.src = src;
+      makeTheHalfToneImage(inputImage, outputImage, cImage, mImage, yImage, kImage, dotSize, updateDisplayImagesCallback);
+      return;
+    }
+  }
+  let reader = new FileReader();
+  reader.onload = function(e) {
+    let arrayBuffer = reader.result;
+    inputImage.src = arrayBuffer;
+    makeTheHalfToneImage(inputImage, outputImage, cImage, mImage, yImage, kImage, dotSize, updateDisplayImagesCallback);
+  }
+  reader.readAsDataURL(file);
+}
+
+function changeDotSize(val) {
+  dotSizeText.innerHTML = val;
+  dotSize = parseInt(val);
+  makeTheHalfToneImage(inputImage, outputImage, cImage, mImage, yImage, kImage, dotSize, updateDisplayImagesCallback);
+}
+
+function updateDisplayImagesCallback(colorBreakdown) {
+  outputImage.src = colorBreakdown.combinedImage.toDataURL();
+  cImage.src = colorBreakdown.cImage.toDataURL();
+  mImage.src = colorBreakdown.mImage.toDataURL();
+  yImage.src = colorBreakdown.yImage.toDataURL();
+  kImage.src = colorBreakdown.kImage.toDataURL();
+
+  cImageOverlap.src = colorBreakdown.cImage.toDataURL();
+  mImageOverlap.src = colorBreakdown.mImage.toDataURL();
+  yImageOverlap.src = colorBreakdown.yImage.toDataURL();
+  kImageOverlap.src = colorBreakdown.kImage.toDataURL();
+
+  calculateBackgroundDimensions();
+  resetOverlap(imageOverlap.c);
+  resetOverlap(imageOverlap.m);
+  resetOverlap(imageOverlap.y);
+  resetOverlap(imageOverlap.k);
+  setOverlapPositions();
+}
+
+function calculateBackgroundDimensions(){
+  let previewWidth = colorBreakdown.cImage.width;
+  let previewHeight = colorBreakdown.cImage.height;
+  let percentageExtra = 120;
+  let sizeX =  (previewWidth / 100 * percentageExtra);
+  let sizeY = (previewHeight / 100 * percentageExtra);
+  overlapCenterX = (sizeX - colorBreakdown.cImage.width) /2 ;
+  overlapCenterY = (sizeY - colorBreakdown.cImage.height) /2 ;
+  overlapContainer.style.width = sizeX + "px";
+  overlapContainer.style.height = sizeY + "px";
+}
+
+function resetOverlap(obj) {
+  obj.offsetX = 0;
+  obj.offsetY = 0;
+  obj.rotation = 0;
+}
+
+function changeXOffset(value) {
+  let change = value - xOffsetDragOld;
+  xOffsetDragOld = value;
+  if(cCheck.checked) imageOverlap.c.offsetX += change;
+  if(mCheck.checked) imageOverlap.m.offsetX += change;
+  if(yCheck.checked) imageOverlap.y.offsetX += change;
+  if(kCheck.checked) imageOverlap.k.offsetX += change;
+  setOverlapPositions();
+}
+
+function changeYOffset(value) {
+  let change = value - yOffsetDragOld;
+  yOffsetDragOld = value;
+  if(cCheck.checked) imageOverlap.c.offsetY += change;
+  if(mCheck.checked) imageOverlap.m.offsetY += change;
+  if(yCheck.checked) imageOverlap.y.offsetY += change;
+  if(kCheck.checked) imageOverlap.k.offsetY += change;
+  setOverlapPositions();
+}
+
+function changeRotation(value) {
+  let change = value - rotationDragOld;
+  rotationDragOld = value;
+  if(cCheck.checked) imageOverlap.c.rotation += change;
+  if(mCheck.checked) imageOverlap.m.rotation += change;
+  if(yCheck.checked) imageOverlap.y.rotation += change;
+  if(kCheck.checked) imageOverlap.k.rotation += change;
+  setOverlapPositions();
+}
+
+function resetSliders(){
+  xSlider.value = 0;
+  ySlider.value = 0;
+  rotationSlider.value = 0;
+  xOffsetDragOld = 0;
+  yOffsetDragOld = 0;
+  rotationDragOld = 0;
+}
+
+function toggleCheck(o) {
+  if(event.currentTarget == event.target) o = o.children[0];
+  o.checked = !o.checked;
+  resetSliders();
+}
+
+function setOverlapPosition(obj){
+  obj.object.style.left = (overlapCenterX + obj.offsetX) + "px";
+  obj.object.style.top = (overlapCenterY + obj.offsetY) + "px";
+  obj.object.style.transform = `rotate(${obj.rotation}deg)`;
+}
+
+function setOverlapPositions(){
+  setOverlapPosition(imageOverlap.c);
+  setOverlapPosition(imageOverlap.m);
+  setOverlapPosition(imageOverlap.y);
+  setOverlapPosition(imageOverlap.k);
+}
+
+function makeTheHalfToneImage(inputImage, outputImage,  cImage, mImage, yImage, kImage, dotSize, updateDisplayImagesCallback){
+  let c = document.createElement("canvas");
+  let ctx = c.getContext("2d");
+  resetSliders();
+
+  if(inputImage.complete)
+    makeHalfTone();
+  else
+    inputImage.addEventListener("load", makeHalfTone, false);
+
+  function convertImageToCanvas() {
+    c.width = inputImage.width;
+    c.height = inputImage.height;
+    ctx.drawImage(inputImage, 0, 0);
+  }
+
+  function makeHalfTone() {
+    inputImage.removeEventListener("load", makeHalfTone);
+    convertImageToCanvas();
+    let t0 = performance.now();
+    colorBreakdown = calculateHalfTone(ctx, dotSize);
+    let t1 = performance.now();
+    console.log(`Calculations took ${(t1 - t0).toFixed(3)} milliseconds.`);
+    updateDisplayImagesCallback(colorBreakdown);
+  }
+}
+
+function calculateHalfTone(sourceCtx, pixelsPerPoint) {
+  let degRad = 1.0 / 180.0 * Math.PI;
+  let pixelsPerPointReduced = pixelsPerPoint / 1.3;
+  let width = sourceCtx.canvas.width;
+  let height = sourceCtx.canvas.height;
+  let imageData = sourceCtx.getImageData(0, 0, width, height);
+  let hypotenuse = Math.sqrt(width * width + height * height);
+  hypotenuse = Math.ceil(hypotenuse / pixelsPerPoint) * pixelsPerPoint;
+  let colors = [{name: "c", hex: "#00FFFF", angle: 15,
+                 canvas: document.createElement("canvas"), ctx: null,
+                 conversion: function(r, g, b, ik){r/=255; ik/=255; return (ik - r) / ik;}},
+
+                {name: "m", hex: "#FF00FF", angle: 75,
+                 canvas: document.createElement("canvas"), ctx: null,
+                 conversion: function(r, g, b, ik){g/=255; ik/=255; return (ik - g) / ik * 1.1;}},
+
+                {name: "y", hex: "#FFFF00", angle: 0,
+                 canvas: document.createElement("canvas"), ctx: null,
+                 conversion: function(r, g, b, ik){b/=255; ik/=255; return (ik - b) / ik / 1.1;}},
+
+                {name: "k", hex: "#000000", angle: 45,
+                 canvas: document.createElement("canvas"), ctx: null,
+                 conversion: function(r, g, b, ik){ik/=255; return 1 - ik;}}
+               ];
+  colors.map(function(o) {o.canvas.width = width;
+                          o.canvas.height = height;
+                          o.ctx = o.canvas.getContext("2d")});
+
+  let outputCanvas = document.createElement("canvas");
+  let outputContext = outputCanvas.getContext("2d");
+  outputCanvas.width = width;
+  outputCanvas.height = height;
+  outputContext.globalCompositeOperation = "multiply";
+  outputContext.fillStyle = "white";
+  outputContext.fillRect(0, 0, width, height);
+
+  let buildCanvas = document.createElement("canvas");
+  let buildContext = buildCanvas.getContext("2d");
+  buildCanvas.width = width;
+  buildCanvas.height = height;
+
+  for(let cIndex = 0; cIndex < colors.length; cIndex++) {
+    let color = colors[cIndex];
+    let hX = hypotenuse * Math.sin(color.angle * degRad);
+    let hY = hypotenuse * Math.cos(color.angle * degRad);
+    let vX = hypotenuse * Math.sin((color.angle + 90) * degRad);
+    let vY = hypotenuse * Math.cos((color.angle + 90) * degRad);
+    let originX = width / 2 - hX / 2 - vX / 2;
+    let originY = height / 2 - hY / 2 - vY / 2;
+    //buildContext.fillStyle = "white";
+    //buildContext.fillRect(0, 0, width, height);
+    buildContext.clearRect(0, 0, width, height);
+    buildContext.fillStyle = color.hex;
+    for(let y = pixelsPerPoint / 2; y <= hypotenuse; y += pixelsPerPoint) {
+      let yRatio = y / hypotenuse;
+      let posX = vX * yRatio;
+      let posY = vY * yRatio;
+      for(let x = pixelsPerPoint / 2; x <= hypotenuse; x += pixelsPerPoint) {
+        let xRatio = x / hypotenuse;
+        let pointX = posX + hX * xRatio + originX;
+        let pointY = posY + hY * xRatio + originY;
+        let pXR = Math.round(pointX);
+        let pYR = Math.round(pointY);
+        if((pXR >= 0 && pXR <= width && pYR >= 0 && pYR <= height)) {
+          let pixel = pYR * width + pXR;
+          let dataIndex = pixel * 4;
+          let r = imageData.data[dataIndex];
+          let g = imageData.data[dataIndex + 1];
+          let b = imageData.data[dataIndex + 2];
+          let ik = Math.max(r, g, b);
+          let radius = pixelsPerPointReduced * color.conversion(r, g, b, ik);
+          buildContext.beginPath();
+          buildContext.arc(pointX, pointY, radius, 0 , 2 * Math.PI, false);
+          buildContext.fill();
+          //buildContext.fillRect(pointX, pointY, radius * 2, radius * 2);
+        }
+      }
+    }
+    color.ctx.drawImage(buildCanvas, 0, 0);
+    outputContext.drawImage(buildCanvas, 0, 0);
+  }
+
+  return{
+    cImage: colors[0].canvas,
+    mImage: colors[1].canvas,
+    yImage: colors[2].canvas,
+    kImage: colors[3].canvas,
+    combinedImage: outputCanvas
+  }
+}
+
+</script>
+</body>
+</html>

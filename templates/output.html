@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+{% load staticfiles %}
+<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+    <h1><INPUT TYPE="button" VALUE="Click here to... Enter Again" onClick="history.go(-1);"></h1>
+
+    <link rel="stylesheet" href="{% static "output.css"%}">
+
+	<title>Random Message</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+<script type="text/javascript">
+	var msgArr = new Array();
+	msgArr[0] = "YOUR LOVE IS TRUE";
+	msgArr[1] = "YOUR LOVE IS TIMEPASS";
+	msgArr[2] = "YOUR LOVE IS FAKE";
+	msgArr[3] = "YOUR LOVE IS ONE SIDE";
+	msgArr[4] = "YOUR LOVE IS TWO SIDE";
+	msgArr[5] = "THERE IS NO LOVE";
+	msgArr[6] = "THIS IS JUST ATTRACTION";
+	window.onload = function () {
+		document.getElementById("msgDiv").innerHTML = msgArr[Math.floor(Math.random()*msgArr.length)];
+	}
+</script>
+</head>
+
+<body>
+<div id="msgDiv"></div>
+</body>
+</html>

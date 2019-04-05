@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static "game.css"%}">
+
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+
+
+
+<!--  Content  -->
+<article>
+  <!--h1>GROSS DESIGN co. <br /> <span>(Made by <a href="http://mattgross.io" target="_blank">Matt Gross</a>, for <a href="https://evenvision.com">EvenVision</a>)</span></h1-->
+<div id="example2"><center><h1>Welcome to WORD JUMBL!!!!</h1></center></div><hr>
+
+<!--  Video is muted & autoplays, placed after major DOM elements for performance & has an image fallback  -->
+<video autoplay loop id="video-background" muted plays-inline>
+  <source src="http://thenewcode.com/assets/videos/atlantic-light.mp4" type="video/mp4">
+</video>
+
+
+<form action="/gues" method="get">
+
+<img src="{%static "word.jpg"%}" alt="word" width="100%" height="400">
+<div class="info">
+  <p><font size="5"><strong>Note!</strong> Im givining the below jumble words based on the above image...,
+      So you observe the words[65] in the image carefully..!</font></p>
+</div>
+<h1 class="city">Unscramble the letters to make a word.<br></h1>
+
+<div class="cities">
+    <h3>The Jumble word is: <h2>{{ word }}</h2><input type="button" value="Refresh Word" onClick="window.location.href=window.location.href"><span class=reload>&#x21bb;</span></h3></br>
+
+    <p><h1>Your Guess-</h1><input class="w3-input w3-animate-input" type="text"
+                     placeholder="Enter Your Guessing Word" name="t4" style="width:140px"></p>
+    <button class="button" style="vertical-align:middle"><span>Check</span></button>
+    <input type="text" style="text-align: center;color:mediumvioletred;width:30%;height:40%" value="{{ out }}"></td></tr>
+    <INPUT TYPE="button" VALUE="Click here to... Play Again" onClick="history.go(-1);">
+
+</div>
+
+<div id="example1">
+<button type="button"onclick="document.getElementById('demo').innerHTML=Date()">
+Click me to display the current Time and Date.</button>
+<p id="demo"></p>
+</div>
+<!--body background="{%static "images/define.jpg"%}"-->
+</article>
+</body>
+</html>
